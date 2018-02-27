@@ -2,13 +2,17 @@
 output:
   pdf_document: default
   html_document: default
+bibliography: money-happiness.bibtex
 ---
+
 ```{r prep, echo = FALSE, warning=FALSE, message=FALSE}
 library(readxl)
 library(haven)
 library(dplyr)
 library(tidyr)
 library(ggplot2)
+library(kableExtra)
+library(knitr)
 ```
 
 ```{r import-wdi, echo = FALSE,warning=FALSE}
@@ -60,28 +64,54 @@ df <- inner_join(wdi,pew, by = "country") %>%
 
 ```
 
+<!-- Begin title page LaTeX section -->
 
->This is a hypothetical paper written by two hypothetical individuals.
+\begin{flushright}
+Richard Ball\\
+rball@haverford.edu\\
+First version: 2014/06/17\\
+This revision: 2014/06/17\\
+\end{flushright}\bigskip
+\begin{center}
+\fbox{\begin{minipage}{0.9\textwidth}
+\textit{This is a hypothetical paper written by two hypothetical individuals.
 It was prepared for presentation at the BITSS Summer Institute, June 2-6, 2014,
-to illustrate the TIER documentation protocol. www.haverford.edu/TIER
+to illustrate the TIER documentation protocol.}\par
+\begin{center}
+\bigskip{www.haverford.edu/TIER}
+\end{center}
+\end{minipage}}
+\end{center}
 
+\vspace{10mm}
 
-#Money, Happiness and the Midlife Crisis  
+\pagenumbering{gobble}
+\begin{center}
+\LARGE{Money, Happiness and the Midlife Crisis}
+\end{center}
 
+\vspace{40mm}
 
-**Ellsworth Dägg**  
-**Lecturer in Economics and Horticultureé**  
-**Wallywell University**
+\begin{center}
+\large{Ellsworth Dägg\par  
+Lecturer in Economics and Horticultureé\par  
+Wallywell University\bigskip
 
+and\bigskip
 
-**and**  
+Picard Janné\par  
+Director of Research\par  
+Joint Economic and Statistical Taskforce}\bigskip
+\end{center}
 
+\vspace{30mm}
 
-**Picard Janné**  
-**Director of Research**  
-**Joint Economic and Statistical Taskforce**  
-**June 3, 2014**
-
+\begin{center}
+\large{June 3, 2014}
+\end{center}
+\newpage
+\pagenumbering{arabic}
+<!-- End title page LaTeX section -->
 
 ##I. Introduction##
 This paper examines evidence from a multi-country survey of subjective well-being
@@ -90,168 +120,166 @@ existence of a phenomenon that can be interpreted as a midlife crisis. The secon
 there is any evidence of an association between a country's average SWB and each of two macro
 indicators, GPD per capita and government consumption expenditure.
 The policy relevance and intellectual significance of these questions has been verified by
-introspection. Trust us.[^1]  
+introspection. Trust us.[^1]    
+
 The regression analysis of the survey data reported in this paper suggests that, across the
-lifespan, SWB follows the classic inverted U pattern, but turned upside down.[^2]
+lifespan, SWB follows the classic inverted U pattern, but turned upside down.[^2]  
+
 The nature of the association we observe between country averages of SWB and GDP per
 capita depends heavily on one influential case, namely the US. When the US is included in the
 sample, one can argue for a positive association; if the US is excluded, there is weak evidence of
-a negative association.
+a negative association.  
+
 The association between SWB and government consumption appears to be negative,
 although the US is again an outlier. The evidence for the negative association becomes clearer
-when the US is excluded.
+when the US is excluded.  
 
 ##II. Previous literature##
 This paper contributes to large and still growing literature that uses surveys of SWB to
-investigate a variety of socio-economic questions.
-The seminal work in this literature is Easterlin (1974), which focused on the association
+investigate a variety of socio-economic questions.  
+
+The seminal work in this literature is @easterlin_1974, which focused on the association
 between SWB and various notions of income and socio-economic status. By one interpretation,
 Easterlin's results suggest that we should expect to find little association between average income
-and average happiness in cross-sectional, country-level data.
-The pattern of SWB over the life cycle has been studied by Blanchflower and Oswald
-(2007), who find evidence of a U-shaped trajectory. They apparently fail to recognize, however,
+and average happiness in cross-sectional, country-level data.  
+
+The pattern of SWB over the life cycle has been studied by @blanchflower_2007, who find evidence of a U-shaped trajectory. They apparently fail to recognize, however,
 the deep resonance-of an anti-isomorphic nature-of the trajectory they observe with the
-classic inverse U pattern.
+classic inverse U pattern.  
 
 ##III. Data##
-The survey data used in this paper are taken from Pew Research Center Global Attitudes
-Project (2002a). This survey consisted of interviews of between about 500 and 2,500
-individuals conducted in each of 44 countries in 2002.
+The survey data used in this paper are taken from @pew_2002_data. This survey consisted of interviews of between about 500 and 2,500
+individuals conducted in each of 44 countries in 2002.  
+
 In 37 of the countries included in the Pew survey, the number of respondents was less
 than 900. We chose to drop all observations from those 37 countries, which left us with a sample
-of individuals from 7 countries: China, India, Indonesia, Jordan, Pakistan, the Russian
-1 This paragraph is a rip-off from Matthew Rabin, who made a similar quip during a seminar he gave at UC Berkeley
-around 1990 or 1991 (about a new concept he was developing called fairness equilibrium).
-2 Commentators not well-versed in economics sometimes reveal their lack of sophistication by calling this pattern a
-U.
-3
-Federation and the United States. Of the many variables based on respondents' answers to
+of individuals from 7 countries: China, India, Indonesia, Jordan, Pakistan, the Russian Federation 
+and the United States. Of the many variables based on respondents' answers to
 social, political and economic questions, two were extracted for this paper. We gave these
-variables the names SATIS and AGE.
+variables the names SATIS and AGE.  
+
 The variable SATIS is our measure of SWB. Values of this variable were elicited as
 follows: Respondents were presented with a vertically ordered scale of integers, ranging from 10
-at the top of the scale to 0 at the bottom, and the interviewer then asked:
-Here is a ladder representing the "ladder of life." Let's suppose the top [a value of 10] of
+at the top of the scale to 0 at the bottom, and the interviewer then asked:  
+
+>Here is a ladder representing the "ladder of life." Let's suppose the top [a value of 10] of
 the ladder represents the best possible life for you; and the bottom [a value of 0], the
 worst possible life for you. On which step of the ladder do you feel you personally stand
-at the present time? (Pew Research Center Global Attitudes Project, 2002b, p. 6)
+at the present time? [@pew_2002_question, p. 6]    
+
 The variable AGE represents the respondent's age in years at the time of her or his last
 birthday. We also generated the variable AGE-SQUARED to use in the exploration of a possible
-non-linear association between age and SWB.
-Two macro indicators were taken from World Bank (2014). GDP_PC shows the income
+non-linear association between age and SWB.  
+
+Two macro indicators were taken from @wdi_2014. GDP_PC shows the income
 per capita of each country for 2002, expressed in current US dollars. GOV_CON shows
-government consumption expenditure as a share of GDP, again for 2002.
+government consumption expenditure as a share of GDP, again for 2002.  
+
 The variable CM_SATIS, representing country means of SATIS, was constructed for use
-as a measure of SWB in country-level analyses .
+as a measure of SWB in country-level analyses.  
 
 ##IV. Descriptive statistics##
 Table 1 shows the values of CM_SATIS, GDP_PC and GOV_CONS for each of the seven
-countries in the sample.
+countries in the sample.  
 
 ```{r table_1, echo=FALSE, results='asis', warning=FALSE}
 # Mean Satisfaction, GPD per capita and Government Consumption by Country
-knitr::kable(df, caption = "Table 1: Mean Satisfaction, GPD per capita and Government Consumption by Country")
+# knitr::kable(df, caption = "Mean Satisfaction, GPD per capita and Government Consumption by Country")
+# add these notes to table
+# Notes:  
+# a) GPD per capita in current (2002) US dollars  
+# b) General government consumption expenditure, percent of GDP
+df.tmp <- df
+df.tmp[,-1] <-round(df.tmp[,-1],2)
+names(df.tmp) <- c("Country", "Mean Satis", "GDP per capita", "Gov Cons")
+kable(df.tmp, "latex", caption = "Mean Satisfaction, GPD per capita and Government Consumption by Country", booktabs = T) %>%
+  #kable_styling(latex_options = "striped") %>%
+  footnote(alphabet = c("GPD per capita in current (2002) US dollars", 
+                        "General government consumption expenditure, percent of GDP"))
 ```
 
 ##V. Analysis and results##
 To investigate whether the data contain evidence of the phenomenon of a midlife crisis,
 we did an OLS regression of *SATIS* against *AGE* and *AGE_SQUARED*. The results of this
-regression are shown in Column 1 of Table 2.
+regression are shown in Column 1 of Table 2.  
 
 We ran another OLS regression of *SATIS* against *AGE* and *AGE_SQUARED*, this time
 including country fixed effects. The results of this regression are shown in Column 2 of 
-Table 2.
+Table 2.  
+
+```{r table_2, echo = FALSE, warning = FALSE, results = 'asis', message=FALSE}
+library(stargazer)
+attach(pew)
+fit <- lm(satis.score ~ age + age2)
+stargazer(fit, type = 'latex', title = 'Regression Results')
+detach(pew)
+```
 
 In both regressions, the coefficient on AGE is negative and the coefficient on and
 *AGE_SQUARED* is positive, and in all four cases the p-values are below 0.0005. In both
 regressions, therefore, the fitted value of *SATIS* follows an upside-down inverted-U 
 pattern with respect to *AGE*, and reaches a unique interior minimum. We will call the age 
-at which the minimum fitted value of *SATIS* occurs the "age of minimum SWB."
+at which the minimum fitted value of *SATIS* occurs the "age of minimum SWB."  
 
 If we use $\hat{\beta}_{AGE}$ to represent the estimated coefficient on *AGE* 
 and $\hat{\beta}_{AGE-SQUARED}$ to represent the estimated coefficient on *AGE-SQUARED*, 
 then the age of minimum SWB is equal to $-\frac{\hat{\beta}_{AGE}}{2\hat{\beta}_{AGE-SQUARED}}$. Using the estimated coefficients from 
-our regressions we find:
+our regressions we find:  
 
-Column 1 (no country fixed effects): Age at minimum SWB=47.76  
-Column 2 (with country fixed effects): Age at minimum SWB=53.90
+>Column 1 (no country fixed effects): Age at minimum SWB=47.76  
+>Column 2 (with country fixed effects): Age at minimum SWB=53.90
 
 Depending on which specification we use, we find that the age at minimum *SWB* is about
 47 years and 9 months or 53 years and 11 months. We interpret this pattern, in which estimated
 age at minimum SWB is within a few years of 50, as evidence in favor of a phenomenon that can
-be called a midlife crisis.
+be called a midlife crisis.[^3]  
 
 To examine the association between country means of SWB and GDP per capita, we
 construct the scatterplot shown in Figure 1. The OLS line through those points would probably
 be upward sloping, and maybe even statistically significant. However, such a result would be
-influenced heavily by the observation for the US. It appears that if the US were dropped from the sample, the association might in fact be negative.
+influenced heavily by the observation for the US. It appears that if the US were dropped from the sample, 
+the association might in fact be negative.  
 
 To examine the association between country means of SWB and GDP per capita, we
 construct the scatterplot shown in Figure 2. The OLS line through those points would probably
 be downward sloping, and maybe even statistically significant. Again, however, the US is an
 outlier. In this case, it appears that dropping the US would lead to a much cleaner negative
-association.
+association.  
 
 ##VI. Conclusion##
 The analysis presented in this paper provides evidence of an upside-down inverted U
 relationship between SWB and age, with minimum SWB occurring within a few years of 50.
-This result is consistent with the findings of Blanchflower and Oswald (2007).
+This result is consistent with the findings of Blanchflower and Oswald (2007).  
+
 The country-level, cross-sectional associations between mean SWB and GDP per capita
 and between mean SWB and government consumption expenditures depend heavily on whether
 the US is included in the sample.
-3 A careful analysis would include also things like robustness tests and other forms of sensitivity analysis, as well as
-consideration of the magnitude or practical significance of the estimated coefficients. To maintain the realism of
-this paper as an example of economic research, such considerations are omitted.
-5
 
-##References##  
-Blanchflower, D. G., & Oswald, A. (2007). Is well-being U-shaped over the life cycle? National
-Bureau of Economic Research, Inc, NBER Working Papers: 12935.
-Easterlin, R. (1974.) "Does Economic Growth Improve the Human Lot? Some Empirical
-Evidence." In Nations and Households in Economic Growth, ed. P. A. David and M. W. Reder.
-Stanford, CA: Stanford University Press.
-
-##Sources of Data and Supporting Information##  
-Pew Research Center Global Attitudes Project (2002a). SUMMER 2002 SURVEY DATA: 44-
-Nation Survey Conducted July 2-October 31, 2002 [Dataset]. Accessed at
-http://www.pewglobal.org/category/datasets/2002/, June 1, 2014.
-Pew Research Center Global Attitudes Project (2002b). SUMMER 2002 SURVEY DATA: 44-
-Nation Survey Conducted July 2-October 31, 2002 [Questionnaire]. Accessed at
-http://www.pewglobal.org/category/datasets/2002/, June 1, 2014.
-World Bank (2014). World Development Indicators On-line. Accessed at
-http://data.worldbank.org/data-catalog/world-development-indicators, June 1, 2014.
-6
-
-
-
-Notes:  
-a) GPD per capita in current (2002) US dollars  
-b) General government consumption expenditure, percent of GDP
-
-
-**TABLE 2**
-```{r regression_results, echo = FALSE, warning = FALSE, results = 'asis', message=FALSE}
-library(stargazer)
-attach(pew)
-fit <- lm(satis.score ~ age + age2)
-stargazer(fit, type = 'latex')
-detach(pew)
-```
-
-**FIGURE 1**
 ```{r fig_1, echo = FALSE}
-ggplot(df, aes(x=inc, y=cm_satis))  +
-  geom_text(label = df$country.name, vjust="top") + geom_point()
-
+fig1 <- ggplot(df, aes(x=inc, y=cm_satis))  +
+  geom_text(label = df$country.name, vjust="top", hjust=-0.1) + 
+  labs(title = "FIGURE 1",
+       subtitle = "Scatterplot of GDP per capita and Mean Satisfaction") +
+  expand_limits(x = 45000)
+  
+fig1 + geom_point() + labs(x = "GDP per capita (current [2002] $ US)", y = "Satisfaction")
 ```
 
 
-**FIGURE 2**
 ```{r fig_2, echo = FALSE}
 # Scatterplot of General Government Consumption and Mean Satisfaction
-
-ggplot(df, aes(x=exp, y=cm_satis))  +
-  geom_text(label = df$country.name, vjust="top") + geom_point()
-  
-
+fig2 <- ggplot(df, aes(x=exp, y=cm_satis))  +
+  geom_text(label = df$country.name, vjust="top", hjust=-0.1) +
+  labs(title = "FIGURE 2",
+       subtitle = "Scatterplot of General Government Consumption and Mean Satisfaction") +
+  expand_limits(x = 25)
+fig2 + geom_point() + labs(x = "Gov. cons., % of GDP", y = "Satisfaction")
 ```
+
+##References## 
+
+
+[^1]: This paragraph is a rip-off from Matthew Rabin, who made a similar quip during a seminar he gave at UC Berkeley
+around 1990 or 1991 (about a new concept he was developing called fairness equilibrium).
+[^2]: Commentators not well-versed in economics sometimes reveal their lack of sophistication by calling this pattern a U.
+[^3]: A careful analysis would include also things like robustness tests and other forms of sensitivity analysis, as well as consideration of the magnitude or practical significance of the estimated coefficients. To maintain the realism of this paper as an example of economic research, such considerations are omitted.
