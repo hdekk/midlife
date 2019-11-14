@@ -113,7 +113,7 @@ Joint Economic and Statistical Taskforce}\bigskip
 \pagenumbering{arabic}
 <!-- End title page LaTeX section -->
 
-##I. Introduction##
+## I. Introduction  
 This paper examines evidence from a multi-country survey of subjective well-being
 (SWB) to investigate two questions. The first is whether the survey shows evidence of the
 existence of a phenomenon that can be interpreted as a midlife crisis. The second is whether
@@ -134,7 +134,7 @@ The association between SWB and government consumption appears to be negative,
 although the US is again an outlier. The evidence for the negative association becomes clearer
 when the US is excluded.  
 
-##II. Previous literature##
+## II. Previous literature
 This paper contributes to large and still growing literature that uses surveys of SWB to
 investigate a variety of socio-economic questions.  
 
@@ -147,7 +147,7 @@ The pattern of SWB over the life cycle has been studied by @blanchflower_2007, w
 the deep resonance-of an anti-isomorphic nature-of the trajectory they observe with the
 classic inverse U pattern.  
 
-##III. Data##
+## III. Data
 The survey data used in this paper are taken from @pew_2002_data. This survey consisted of interviews of between about 500 and 2,500
 individuals conducted in each of 44 countries in 2002.  
 
@@ -178,7 +178,7 @@ government consumption expenditure as a share of GDP, again for 2002.
 The variable CM_SATIS, representing country means of SATIS, was constructed for use
 as a measure of SWB in country-level analyses.  
 
-##IV. Descriptive statistics##
+## IV. Descriptive statistics
 Table 1 shows the values of CM_SATIS, GDP_PC and GOV_CONS for each of the seven
 countries in the sample.  
 
@@ -198,7 +198,7 @@ kable(df.tmp, "latex", caption = "Mean Satisfaction, GPD per capita and Governme
                         "General government consumption expenditure, percent of GDP"))
 ```
 
-##V. Analysis and results##
+## V. Analysis and results
 To investigate whether the data contain evidence of the phenomenon of a midlife crisis,
 we did an OLS regression of *SATIS* against *AGE* and *AGE_SQUARED*. The results of this
 regression are shown in Column 1 of Table 2.  
@@ -246,7 +246,7 @@ be downward sloping, and maybe even statistically significant. Again, however, t
 outlier. In this case, it appears that dropping the US would lead to a much cleaner negative
 association.  
 
-##VI. Conclusion##
+## VI. Conclusion
 The analysis presented in this paper provides evidence of an upside-down inverted U
 relationship between SWB and age, with minimum SWB occurring within a few years of 50.
 This result is consistent with the findings of Blanchflower and Oswald (2007).  
@@ -276,7 +276,7 @@ fig2 <- ggplot(df, aes(x=exp, y=cm_satis))  +
 fig2 + geom_point() + labs(x = "Gov. cons., % of GDP", y = "Satisfaction")
 ```
 
-##References## 
+## References
 
 
 [^1]: This paragraph is a rip-off from Matthew Rabin, who made a similar quip during a seminar he gave at UC Berkeley
